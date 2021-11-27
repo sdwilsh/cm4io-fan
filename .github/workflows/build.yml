@@ -24,15 +24,14 @@ jobs:
       - name: "Install Debian Dependencies"
         if: matrix.distro.name == 'debian'
         run: |
-          dpkg --add-architecture arm64
           apt-get update -q
-          apt-get install -qy build-essential crossbuild-essential-arm64 device-tree-compiler dkms linux-headers-arm64
+          apt-get install -qy device-tree-compiler dkms
       # This step grabbed from DKMS's own GitHub action logic
       - name: "Compute packaged kernel version"
         run: |
           KERNEL_VER=''
           if [ "${{ matrix.distro.name }}" = debian ] ; then
-            KERNEL_VER="$(LANG=C dpkg --status linux-headers-arm64 | sed -n 's/^Depends: linux-headers-\(\S\+\)\( .*\)\?/\1/p' | head -n 1)"
+            KERNEL_VER="$(LANG=C dpkg --status linux-headers-amd64 | sed -n 's/^Depends: linux-headers-\(\S\+\)\( .*\)\?/\1/p' | head -n 1)"
           fi
           if [ -z "${KERNEL_VER}" ] ; then
             echo >&2 "Error: no kernel package found"
