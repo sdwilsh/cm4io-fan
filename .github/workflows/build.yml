@@ -25,7 +25,7 @@ jobs:
         if: matrix.distro.name == 'debian'
         run: |
           apt-get update -q
-          apt-get install -qy dkms linux-headers-$(uname -r)
+          apt-get install -qy dkms
       - name: "Debug"
         run: |
           dpkg --list | grep linux-image
