@@ -25,7 +25,7 @@ jobs:
         if: matrix.distro.name == 'debian'
         run: |
           apt-get update -q
-          apt-get install -qy dkms
+          apt-get install -qy dkms linux-headers-$(uname -r)
       - name: "Link files"
         run: |
           ln -s $(pwd) /usr/src/cm4io-fan-${GITHUB_SHA}
@@ -35,4 +35,4 @@ jobs:
           ls -l /usr/src/cm4io-fan-${GITHUB_SHA}/
       - name: "Build"
         run: |
-          dkms build cm4io-fan/${GITHUB_SHA}
+          dkms build -m cm4io-fan -v ${GITHUB_SHA}
