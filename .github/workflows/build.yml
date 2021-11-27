@@ -24,6 +24,7 @@ jobs:
       - name: "Install Debian Dependencies"
         if: matrix.distro.name == 'debian'
         run: |
+          dpkg --add-architecture arm64
           apt-get update -q
           apt-get install -qy build-essential crossbuild-essential-arm64 device-tree-compiler dkms linux-headers-arm64
       # This step grabbed from DKMS's own GitHub action logic
