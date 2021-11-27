@@ -26,13 +26,12 @@ jobs:
         run: |
           apt-get update -q
           apt-get install -qy dkms linux-headers-$(uname -r)
+      - name: "Debug"
+        run: |
+          dpkg --list | grep linux-image
       - name: "Link files"
         run: |
           ln -s $(pwd) /usr/src/cm4io-fan-${GITHUB_SHA}
-      - name: "Debug"
-        run: |
-          ls -l /usr/src/
-          ls -l /usr/src/cm4io-fan-${GITHUB_SHA}/
       - name: "Build"
         run: |
           dkms build -m cm4io-fan -v ${GITHUB_SHA}
