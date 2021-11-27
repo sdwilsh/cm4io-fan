@@ -35,7 +35,8 @@ jobs:
           ln -s . /usr/src/cm4io-fan-${GITHUB_SHA}
       - name: "Debug"
         run: |
-          ls -a /usr/src/cm4io-fan-${GITHUB_SHA}
+          ls /usr/src/
+          ls -a /usr/src/cm4io-fan-${GITHUB_SHA}/
       - name: "Build"
         run: |
           dkms build cm4io-fan/${GITHUB_SHA}
