@@ -47,4 +47,4 @@ jobs:
           ln -s $(pwd) /usr/src/cm4io-fan-${GITHUB_SHA}
       - name: "Build"
         run: |
-          dkms build -m cm4io-fan -v ${GITHUB_SHA}
+          dkms build -m cm4io-fan -v ${GITHUB_SHA} -k ${KERNEL_VER}
