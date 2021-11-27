@@ -28,7 +28,7 @@ jobs:
           apt-get install -qy dkms
       - name: "Link files"
         run: |
-          ln -s . /usr/src/cm4io-fan-${GITHUB_SHA}
+          ln -s $(pwd) /usr/src/cm4io-fan-${GITHUB_SHA}
       - name: "Debug"
         run: |
           ls -l /usr/src/
