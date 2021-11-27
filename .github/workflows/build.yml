@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: "actions/checkout@v2"
       - name: "Install Debian Dependencies"
-        if: matrix.distro.name == "debian"
+        if: matrix.distro.name == 'debian'
         run: |
           apt-get update -q
           apt-get install -qy dkms
