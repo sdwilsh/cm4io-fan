@@ -14,6 +14,8 @@ jobs:
           - name: "debian"
             tag: "11"
     runs-on: "ubuntu-20.04"
+    permissions:
+      contents: "read"
     container:
       image: "docker://docker.io/library/${{ matrix.distro.name }}:${{ matrix.distro.tag }}"
 
