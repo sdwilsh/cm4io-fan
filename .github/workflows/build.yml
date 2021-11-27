@@ -28,8 +28,8 @@ jobs:
           apt-get install -qy dkms
       - name: "Copy files"
         run: |
-          mkdir /usr/src/cm4io-fan-${GITHUB_SHA::8}
-          git archive HEAD | tar -x -C "/usr/src/cm4io-fan-${GITHUB_SHA::8}"
+          mkdir /usr/src/cm4io-fan-${GITHUB_SHA}
+          git archive HEAD | tar -x -C "/usr/src/cm4io-fan-${GITHUB_SHA}"
       - name: "Build"
         run: |
-          dkms build cm4io-fan/${GITHUB_SHA::8}
+          dkms build cm4io-fan/${GITHUB_SHA}
