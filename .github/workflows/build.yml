@@ -26,10 +26,9 @@ jobs:
         run: |
           apt-get update -q
           apt-get install -qy dkms
-      - name: "Copy files"
+      - name: "Link files"
         run: |
-          mkdir /usr/src/cm4io-fan-${GITHUB_SHA}
-          git archive HEAD | tar -x -C "/usr/src/cm4io-fan-${GITHUB_SHA}"
+          ln -s . /usr/src/cm4io-fan-${GITHUB_SHA}
       - name: "Build"
         run: |
           dkms build cm4io-fan/${GITHUB_SHA}
