@@ -47,9 +47,9 @@ jobs:
           ln -s $(pwd) /usr/src/cm4io-fan-${GITHUB_SHA}
       - name: "Build"
         id: "build"
-        continue-on-error: true
         run: |
           dkms build -m cm4io-fan -v ${GITHUB_SHA} -k ${KERNEL_VER}
       - name: "Print make log"
+        if: failure() && steps.build.conclusion == 'failure'
         run: |
           cat /var/lib/dkms/cm4io-fan/${GITHUB_SHA}/build/make.log
