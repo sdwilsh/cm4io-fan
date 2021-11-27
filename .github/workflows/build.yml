@@ -21,10 +21,6 @@ jobs:
 
     steps:
       - uses: "actions/checkout@v2"
-      - name: "Debug"
-        run: |
-          pwd
-          ls -a
       - name: "Install Debian Dependencies"
         if: matrix.distro.name == 'debian'
         run: |
@@ -35,8 +31,8 @@ jobs:
           ln -s . /usr/src/cm4io-fan-${GITHUB_SHA}
       - name: "Debug"
         run: |
-          ls /usr/src/
-          ls -a /usr/src/cm4io-fan-${GITHUB_SHA}/
+          ls -l /usr/src/
+          ls -l /usr/src/cm4io-fan-${GITHUB_SHA}/
       - name: "Build"
         run: |
           dkms build cm4io-fan/${GITHUB_SHA}
