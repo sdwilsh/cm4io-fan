@@ -26,9 +26,22 @@ jobs:
         run: |
           apt-get update -q
           apt-get install -qy dkms
+      # This step grabbed from DKMS's own GitHub action logic
+      - name: "Compute packaged kernel version"
+        run: |
+          KERNEL_VER=''
+          if [ "${{ matrix.distro.name }}" = debian ] ; then
+            KERNEL_VER="$(LANG=C dpkg --status linux-headers-amd64 | sed -n 's/^Depends: linux-headers-\(\S\+\)\( .*\)\?/\1/p' | head -n 1)"
+          fi
+          if [ -z "${KERNEL_VER}" ] ; then
+            echo >&2 "Error: no kernel package found"
+            exit 1
+          fi
+          echo "Found packaged kernel ${KERNEL_VER}"
+          echo "KERNEL_VER=${KERNEL_VER}" >> "$GITHUB_ENV"
       - name: "Debug"
         run: |
-          dpkg --list | grep linux-image
+          env | sort
       - name: "Link files"
         run: |
           ln -s $(pwd) /usr/src/cm4io-fan-${GITHUB_SHA}
